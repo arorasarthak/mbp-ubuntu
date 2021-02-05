@@ -21,7 +21,7 @@ cp "${ROOT_PATH}/files/grub/grub.cfg" "${IMAGE_PATH}"/isolinux/grub.cfg
 
 echo >&2 "===]> Info: Compress the chroot... "
 cd "${WORKING_PATH}"
-mksquashfs "${CHROOT_PATH}" "${IMAGE_PATH}"/casper/filesystem.squashfs
+mksquashfs "${CHROOT_PATH}" "${IMAGE_PATH}"/casper/filesystem.squashfs -b 1048576 -comp xz -Xdict-size 100%
 printf "%s" "$(du -sx --block-size=1 "${CHROOT_PATH}" | cut -f1)" >"${IMAGE_PATH}"/casper/filesystem.size
 
 echo >&2 "===]> Info: Create manifest... "
